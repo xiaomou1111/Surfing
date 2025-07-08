@@ -153,7 +153,52 @@ dns:
   fake-ip-range: 172.20.0.1/16
   fake-ip6-range: "2001:da8::/64"
   fake-ip-filter:
-    - "RULE-SET:CN_域,LAN_域,GoogleFCM_域"
+  # 局域网和本地服务
+  - '*.lan'
+  - '*.localdomain'
+  - '*.local'
+  - 'localhost'
+  - 'broadcasthost'
+
+  # 系统时间/NTP
+  - 'ntp.*'
+  - 'time.*'
+  - 'pool.ntp.org'
+  - '*.ntp.org.cn'
+
+  # 小米系统激活/连接测试
+  - 'connect.rom.miui.com'
+  - 'dns.msftncsi.com'
+  - 'www.msftncsi.com'
+  - 'www.msftconnecttest.com'
+
+  # PlayStation / Xbox / Nintendo 联网验证
+  - '*.srv.nintendo.net'
+  - '*.stun.playstation.net'
+  - 'xbox.*.microsoft.com'
+
+  # VoWiFi 专属关键域名（核心部分）
+  - '*.ims.mnc*'                     # IMS 注册相关（EPC 核心网络）
+  - '*.epc.mnc*'                     # VoLTE/EPC 注册
+  - '*.volte.*'                      # 通常用于 VoLTE 相关 STUN/IMS 服务
+  - 'epdg.*'                         # ePDG：Evolved Packet Data Gateway
+  - 'ss.epdg.epc.*'                  # 一些 Android 客户端使用的 ePDG 域
+  - '*.wifi.call.*'                 # 某些运营商使用
+  - 'ims.*'                         # IMS 子域
+  - '*.ims.*.mnc*.mcc*.*'           # 完整 IMS 域匹配（常见运营商格式）
+  - '*.epdg.*.mnc*.mcc*.*'          # ePDG 服务器完整匹配
+
+  # 海外运营商常用 STUN/TURN 域名（VoWiFi 注册）
+  - 'ss.epdg.epc.att.net'
+  - 'ss.epdg.epc.tmobile.com'
+  - 'ss.epdg.epc.verizon.com'
+  - 'epdg.epc.mnc260.mcc310.pub.3gppnetwork.org'
+  - 'epdg.epc.mnc001.mcc310.pub.3gppnetwork.org'
+  - '*.wifi.call.t-mobile.com'
+  - '*.wifi.call.ee.co.uk'
+  - '*.wifi.call.rogers.com'
+  - '*.wifi.call.three.co.uk'
+  - "RULE-SET:CN_域,LAN_域,GoogleFCM_域"
   direct-nameserver:
     - https://doh.pub/dns-query#🇨🇳 瓦洛兰大陆
     - https://dns.alidns.com/dns-query#🇨🇳 瓦洛兰大陆&h3=true
